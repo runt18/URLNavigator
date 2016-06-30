@@ -127,7 +127,13 @@ class URLNavigatorPublicTests: XCTestCase {
     // MARK: Scheme
 
     func testSetScheme() {
+        self.navigator.scheme = nil
+        XCTAssertEqual(self.navigator.scheme, nil)
         self.navigator.scheme = "myapp"
+        XCTAssertEqual(self.navigator.scheme, "myapp")
+        self.navigator.scheme = "myapp:"
+        XCTAssertEqual(self.navigator.scheme, "myapp")
+        self.navigator.scheme = "myapp:/"
         XCTAssertEqual(self.navigator.scheme, "myapp")
         self.navigator.scheme = "myapp://"
         XCTAssertEqual(self.navigator.scheme, "myapp")

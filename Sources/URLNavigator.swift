@@ -78,9 +78,7 @@ public class URLNavigator {
     ///     Navigator.map("myapp://post/<title>", PostViewController.self)
     public var scheme: String? {
         didSet {
-            if let scheme = self.scheme where scheme.containsString("://") == true {
-                self.scheme = scheme.componentsSeparatedByString("://")[0]
-            }
+            self.scheme = scheme?.componentsSeparatedByString(":")[0]
         }
     }
 
