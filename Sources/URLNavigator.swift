@@ -76,10 +76,25 @@ public class URLNavigator {
     ///
     ///     Navigator.map("myapp://user/<int:id>", UserViewController.self)
     ///     Navigator.map("myapp://post/<title>", PostViewController.self)
-    public var scheme: String? {
+    
+    // remains for backwards-compatibility
+    @available(*, deprecated, message="Use 'schemes' instead") public var scheme: String? {
+        set {
+            if let newValue = newValue {
+                schemes = [newValue]
+            } else {
+                schemes = nil
+            }
+        }
+        get {
+            return schemes?.first
+        }
+    }
+    
+    public var schemes: [String]? {
         didSet {
-            if let scheme = self.scheme where scheme.containsString("://") == true {
-                self.scheme = scheme.componentsSeparatedByString("://")[0]
+            if let s = schemes {
+                schemes = s.map{$0.componentsSeparatedByString(":")[0]}
             }
         }
     }
